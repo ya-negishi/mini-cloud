@@ -1,0 +1,9 @@
+interface={{ interface_name }}
+dhcp-range={{ dhcp_range_start }},{{ dhcp_range_end }},12h
+
+domain={{ domain_name }}
+local=/{{ domain_name }}/
+
+{% for host in host_entries %}
+address=/{{ host.hostname }}.{{ domain_name }}/{{ host.ip }}
+{% endfor %}

@@ -1,0 +1,39 @@
+---
+- name: Setup Controller VM for Mini-Cloud
+  hosts: controller
+  become: yes
+  vars_files:
+    - vars/main.yml
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install dnsmasq
+      apt:
+        name: dnsmasq
+        state: present
+
+    - name: Set hostname
+      hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: Configure Netplan
+      template:
+        src: templates/netplan.yaml.j2
+        dest: /etc/netplan/01-controller-config.yaml
+
+    - name: Apply Netplan configuration
+      command: netplan apply
+
+    - name: Configure dnsmasq for DHCP and DNS
+      template:
+        src: templates/dnsmasq.conf.j2
+        dest: /etc/dnsmasq.d/mini-cloud.conf
+
+    - name: Restart dnsmasq
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: yes

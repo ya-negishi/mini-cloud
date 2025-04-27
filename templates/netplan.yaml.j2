@@ -1,0 +1,9 @@
+network:
+  version: 2
+  ethernets:
+    {{ interface_name }}:
+      addresses:
+        - {{ fixed_ip }}
+      gateway4: {{ gateway_ip }}
+      nameservers:
+        addresses: {{ nameservers }}

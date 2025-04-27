@@ -1,0 +1,30 @@
+---
+- name: Setup Compute Nodes
+  hosts: compute
+  become: yes
+  vars_files:
+    - vars/compute_vars.yml
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Set hostname
+      hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: Configure Netplan for DHCP
+      template:
+        src: templates/compute-netplan.yaml.j2
+        dest: /etc/netplan/50-cloud-init.yaml
+
+    - name: Apply Netplan configuration
+      command: netplan apply
+
+    - name: Install required packages
+      apt:
+        name:
+          - openssh-server
+          - python3
+        state: present
