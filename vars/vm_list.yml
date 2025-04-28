@@ -1,0 +1,16 @@
+vm_list:
+  - name: controller
+    memory: 2048
+    cpus: 2
+    disk_size: 20000
+  - name: compute01
+    memory: 2048
+    cpus: 2
+    disk_size: 20000
+  - name: compute02
+    memory: 2048
+    cpus: 2
+    disk_size: 20000
+
+network_name: mini-cloud-net
+base_disk_path: /path/to/base_disk.vdi

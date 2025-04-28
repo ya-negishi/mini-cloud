@@ -1,0 +1,26 @@
+---
+- name: Create VMs on VirtualBox
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+    - vars/vm_list.yml
+
+  tasks:
+    - name: Create and start VMs
+      community.general.virtualbox_vm:
+        name: "{{ item.name }}"
+        state: running
+        cpus: "{{ item.cpus }}"
+        memory: "{{ item.memory }}"
+        vram: 16
+        disk:
+          - controller: SATA
+            image: "{{ item.name }}.vdi"
+            size: "{{ item.disk_size }}"
+            create: yes
+        networks:
+          - type: intnet
+            intnet: "{{ network_name }}"
+        ostype: Ubuntu_64
+      loop: "{{ vm_list }}"
