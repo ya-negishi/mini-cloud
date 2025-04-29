@@ -1,0 +1,15 @@
+DEFAULT menu
+PROMPT 0
+MENU TITLE Mini-Cloud PXE Boot Menu
+
+LABEL compute01
+  MENU LABEL Install Compute01
+  KERNEL ubuntu-installer/amd64/linux
+  INITRD ubuntu-installer/amd64/initrd.gz
+  APPEND ip=dhcp url=http://192.168.56.10/cloud-init/compute01/user-data autoinstall ds=nocloud-net;s=http://192.168.56.10/cloud-init/compute01/
+
+LABEL compute02
+  MENU LABEL Install Compute02
+  KERNEL ubuntu-installer/amd64/linux
+  INITRD ubuntu-installer/amd64/initrd.gz
+  APPEND ip=dhcp url=http://192.168.56.10/cloud-init/compute02/user-data autoinstall ds=nocloud-net;s=http://192.168.56.10/cloud-init/compute02/

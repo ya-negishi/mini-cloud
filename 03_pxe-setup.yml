@@ -58,3 +58,15 @@
         name: nginx
         state: restarted
         enabled: yes
+    
+    - name: Copy cloud-init files to PXE server
+      copy:
+        src: cloud-init/
+        dest: /srv/http/cloud-init/
+        mode: '0755'
+
+    - name: Copy PXE boot menu
+      copy:
+        src: pxe-menu/pxelinux.cfg/
+        dest: /srv/tftp/pxelinux.cfg/
+        mode: '0755'
