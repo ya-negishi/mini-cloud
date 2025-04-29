@@ -46,7 +46,7 @@ mini-cloud/
 ### ① 仮想マシンの作成
 
 ```bash
-ansible-playbook -i localhost, create-vm.yml
+ansible-playbook -i localhost, 01_create-vm.yml
 ```
 
 ---
@@ -54,7 +54,7 @@ ansible-playbook -i localhost, create-vm.yml
 ### ② Controllerノードの基本セットアップ
 
 ```bash
-ansible-playbook -i inventory controller-setup.yml
+ansible-playbook -i inventory 02_controller-setup.yml
 ```
 
 ---
@@ -62,7 +62,7 @@ ansible-playbook -i inventory controller-setup.yml
 ### ③ PXEサーバーの構築
 
 ```bash
-ansible-playbook -i inventory pxe-setup.yml
+ansible-playbook -i inventory 03_pxe-setup.yml
 ```
 
 ---
@@ -72,7 +72,7 @@ ansible-playbook -i inventory pxe-setup.yml
 PXEブートでインストール後、Computeノードをセットアップします。
 
 ```bash
-ansible-playbook -i inventory compute-setup.yml
+ansible-playbook -i inventory 04_compute-setup.yml
 ```
 
 ---
