@@ -1,0 +1,6 @@
+# PXEサーバー用変数
+tftp_root: /srv/tftp
+http_root: /srv/http/ubuntu
+bootfile_name: pxelinux.0
+netboot_files:
+  - { url: "http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/images/netboot/netboot.tar.gz", dest: "/tmp/netboot.tar.gz" }
